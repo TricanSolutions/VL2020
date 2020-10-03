@@ -1,0 +1,3 @@
+ $link = mysql_connect('mysql1003.mochahost.com', 'trican_vijaya', 'tricanlk') or die("Couldn't make connection.");
+must create 'images' folder to save capture images
+(e~3.+G!

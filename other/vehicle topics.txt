@@ -1,0 +1,76 @@
+b manual
+Manual Stimulator(Indoor), 
+Move Over and Stopping",
+Move Over and Stopping",
+Clutch Balancing",
+Shifting Gears",
+Using Mirrors and Hand Signals,
+Obsservation/Dicisions",
+Positioning and Parking",
+Reversing/Straight", 
+Using Round About",
+Reversing 90",
+Driving in Traffic", 
+Turning to a by Road",
+Entering to a main road", 
+Overtaking", 
+Reversing and Parking", 
+Reversing and Parking",
+Using Junctions",
+
+3 Wheeler b1
+Starting and Move over(3 Wheeler)",
+Positioning/Junctions(3 Wheeler)",
+Reversing(3 Wheeler)", 
+
+M Cycle A
+"Move Over and Stopping(M Cycle)",
+"Zig Zag and 8(M Cycle)",
+"Zig Zag and 8(M Cycle)"
+
+Auto car  b
+Manual Stimulator(Indoor), 
+Move Over and Stopping",
+Move Over and Stopping",
+Selecting Gears,
+Using Mirrors and Hand Signals,
+Obsservation/Dicisions",
+Positioning and Parking",
+Positioning and Parking",
+Reversing/Straight", 
+Using Round About",
+Reversing 90",
+Driving in Traffic", 
+Turning to a by Road",
+Entering to a main road", 
+Overtaking", 
+Reversing and Parking", 
+Reversing and Parking",
+Using Junctions",
+
+d bus(parttime)
+"Move Over and Stopping",
+"Clutch Balancing",
+"Shifting Gears",
+"Using Mirrors and Hand Signals",
+"Reversing and Parking"
+
+d bus (fulltime)
+"Manual Stimulator(Indoor)", 
+"Move Over and Stopping",
+"Move Over and Stopping",
+"Selecting Gears",
+"Using Mirrors and Hand Signals",
+"Obsservation/Dicisions",
+"Positioning and Parking",
+"Positioning and Parking",
+"Reversing/Straight", 
+"Using Round About",
+"Reversing 90",
+"Driving in Traffic", 
+"Turning to a by Road",
+"Entering to a main road", 
+"Overtaking", 
+"Reversing and Parking", 
+"Reversing and Parking",
+"Using Junctions"
