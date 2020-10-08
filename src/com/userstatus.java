@@ -4,10 +4,7 @@
  */
 package com;
 
-/**
- *
- * @author Nimantha
- */
+
 public class userstatus {
 
 //   static  Manager manager = new Manager("megacityPU");

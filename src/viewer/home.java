@@ -6,6 +6,7 @@
 package viewer;
 
 import com.ConstantData;
+import com.userstatus;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -86,6 +87,7 @@ public class home extends javax.swing.JFrame {
         jMenuItem16 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem28 = new javax.swing.JMenuItem();
+        jMenuItem29 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
@@ -261,6 +263,15 @@ public class home extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jMenuItem28);
+
+        jMenuItem29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/png/tick_32.png"))); // NOI18N
+        jMenuItem29.setText("Stamp Fees Approval");
+        jMenuItem29.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem29ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem29);
 
         jMenuBar1.add(jMenu1);
 
@@ -600,11 +611,11 @@ public class home extends javax.swing.JFrame {
 //            e.printStackTrace();
 //        }
 //        
-        
         try {
             Connection con = db.getconn();
             Class.forName("com.mysql.jdbc.Driver"); //
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/vijaya_lerners", "root", "123");
+            //  con = DriverManager.getConnection("jdbc:mysql://localhost:3306/vijaya_lerners", "root", "123");
+            con = DriverManager.getConnection("jdbc:mysql://192.168.123.200:3306/vijaya_lerners?useUnicode=true&characterEncoding=UTF-8", "root", "123");
 
             String reportUrl = "/reports/bigreport.jasper"; //path of your report source.
             InputStream reportFile = null;
@@ -729,6 +740,16 @@ public class home extends javax.swing.JFrame {
         new practicalExamDetails(this, false).setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void jMenuItem29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem29ActionPerformed
+        if (userstatus.LodUser.equals("a")) {
+            new stampfees_checker(this, false).setVisible(true);
+        } else {
+            com.Messages.warningjoption("You don't have admin rights!!!");
+        
+        }
+
+    }//GEN-LAST:event_jMenuItem29ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -804,6 +825,7 @@ public class home extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem26;
     private javax.swing.JMenuItem jMenuItem27;
     private javax.swing.JMenuItem jMenuItem28;
+    private javax.swing.JMenuItem jMenuItem29;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;

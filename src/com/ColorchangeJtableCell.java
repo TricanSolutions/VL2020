@@ -9,10 +9,7 @@ import java.awt.Component;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
-/**
- *
- * @author Sudara
- */
+
 public class ColorchangeJtableCell extends DefaultTableCellRenderer {
 
     String Stringfixvalue = null;

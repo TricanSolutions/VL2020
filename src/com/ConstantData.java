@@ -13,7 +13,7 @@ public class ConstantData {
     public static String Status_DONE = "2";
     public static String Status_DEACTIVE = "3";
     public static String Status_ALLOW = "4";
- //public static String dbConnectionURL = "jdbc:mysql://192.168.1.200:3306/vijaya_lerners";
+  //  public static String dbConnectionURL = "jdbc:mysql://192.168.123.200:3306/vijaya_lerners";
    public static String dbConnectionURL = "jdbc:mysql://localhost:3306/vijaya_lerners";
    // public static String dbConnectionURL = "jdbc:mysql://mysql1003.mochahost.com:3306/trican_vijayalearners";
     //public static String dbUsername = "trican_vijaya";

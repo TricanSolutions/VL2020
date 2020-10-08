@@ -50,11 +50,11 @@ public class viewAllCustomer extends javax.swing.JDialog {
 
             },
             new String [] {
-                "ID", "NIC", "Name", "Admission No", "Reg Date"
+                "ID", "NIC", "Name", "Admission No", "V Class", "Reg Date"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -66,9 +66,10 @@ public class viewAllCustomer extends javax.swing.JDialog {
         if (tblAll.getColumnModel().getColumnCount() > 0) {
             tblAll.getColumnModel().getColumn(0).setMaxWidth(50);
             tblAll.getColumnModel().getColumn(1).setPreferredWidth(150);
-            tblAll.getColumnModel().getColumn(2).setPreferredWidth(750);
-            tblAll.getColumnModel().getColumn(3).setPreferredWidth(200);
+            tblAll.getColumnModel().getColumn(2).setPreferredWidth(300);
+            tblAll.getColumnModel().getColumn(3).setPreferredWidth(150);
             tblAll.getColumnModel().getColumn(4).setPreferredWidth(100);
+            tblAll.getColumnModel().getColumn(5).setPreferredWidth(100);
         }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -152,7 +153,8 @@ public class viewAllCustomer extends javax.swing.JDialog {
                     + "customer_register.id,\n"
                     + "customer_register.admission_no,\n"
                     + "uniquecustomerdetails.nic,\n"
-                    + "uniquecustomerdetails.`name`,\n"
+                    + "uniquecustomerdetails.`namewithinitial`,\n"
+                    + "customer_register.vehicle_class,\n"
                     + "customer_register.reg_date\n"
                     + "FROM\n"
                     + "customer_register ,\n"
@@ -166,8 +168,9 @@ public class viewAllCustomer extends javax.swing.JDialog {
                 String admno = rs.getString(2);
                 String nic = rs.getString(3);
                 String name = rs.getString(4);
-                String date = rs.getString(5);
-                Object arr[] = {id, nic, name, admno, date};
+                String Vclass = rs.getString(5);
+                String date = rs.getString(6);
+                Object arr[] = {id, nic, name, admno,Vclass, date};
                 dtm.addRow(arr);
             }
         } catch (Exception e) {
