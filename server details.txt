@@ -3,7 +3,7 @@ must create 'images' folder to save capture images
 (e~3.+G!
 
 new---
-serever - 199.168.184.42
+serever -  107.155.77.26
 username - vijayadr_root
 password - Vijayads4321
-database - vijayadr_vijaya_lerners
+database - vijayadr_vl

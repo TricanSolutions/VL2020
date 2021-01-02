@@ -40,8 +40,6 @@ public class stampfees_checker extends javax.swing.JDialog {
         txtName = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtVClass = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        checkBoxApproval = new javax.swing.JCheckBox();
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -59,6 +57,16 @@ public class stampfees_checker extends javax.swing.JDialog {
 
         txtAdmissionNo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtAdmissionNo.setForeground(new java.awt.Color(204, 0, 0));
+        txtAdmissionNo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtAdmissionNoActionPerformed(evt);
+            }
+        });
+        txtAdmissionNo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtAdmissionNoKeyPressed(evt);
+            }
+        });
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton1.setText("Find");
@@ -71,29 +79,27 @@ public class stampfees_checker extends javax.swing.JDialog {
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Name");
 
+        txtName.setEditable(false);
         txtName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtName.setForeground(new java.awt.Color(0, 153, 51));
-        txtName.setEnabled(false);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("V Class");
 
+        txtVClass.setEditable(false);
         txtVClass.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtVClass.setForeground(new java.awt.Color(0, 0, 204));
-        txtVClass.setEnabled(false);
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel5.setText("Stam Fees Approval");
-
-        checkBoxApproval.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        checkBoxApproval.setForeground(new java.awt.Color(0, 102, 0));
-        checkBoxApproval.setOpaque(false);
 
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton2.setText("Approved");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
+            }
+        });
+        jButton2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButton2KeyPressed(evt);
             }
         });
 
@@ -119,17 +125,12 @@ public class stampfees_checker extends javax.swing.JDialog {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(txtAdmissionNo, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(61, 61, 61)
-                        .addComponent(checkBoxApproval)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton2)
-                .addGap(157, 157, 157))
+                .addGap(145, 145, 145))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,13 +154,9 @@ public class stampfees_checker extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(txtVClass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel5)
-                    .addComponent(checkBoxApproval))
-                .addGap(37, 37, 37)
+                .addGap(38, 38, 38)
                 .addComponent(jButton2)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         pack();
@@ -167,55 +164,27 @@ public class stampfees_checker extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
-            ResultSet rs = model.db.getData("SELECT\n"
-                    + "	uniquecustomerdetails.namewithinitial, \n"
-                    + "	customer_register.vehicle_class\n"
-                    + "FROM\n"
-                    + "	uniquecustomerdetails\n"
-                    + "	INNER JOIN\n"
-                    + "	customer_register\n"
-                    + "	ON \n"
-                    + "		uniquecustomerdetails.id = customer_register.uniqueCustomerDetails_id\n"
-                    + "WHERE\n"
-                    + "	customer_register.admission_no = '" + txtAdmissionNo.getText() + "'");
-
-            if (rs.next()) {
-
-                txtName.setText(rs.getString(1));
-                txtVClass.setText(rs.getString(2));
-
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+       submit();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-        if (JOptionPane.showConfirmDialog(null, "Are you sure to continue?", "WARNING",
-                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-
-            if (!txtAdmissionNo.getText().isEmpty()) {
-                int approval = 0;
-                try {
-                    if (checkBoxApproval.isSelected()) {
-                        approval = 1;
-                    } else {
-                        approval = 0;
-                    }
-                    model.db.putData("INSERT INTO stampfees_checker (admision_no,pay_approved)values('" + txtAdmissionNo.getText() + "','" + approval + "')");
-                    com.Messages.normaljoption("Approved");
-                    clear();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-
-        }
+      approval();
 
 
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void txtAdmissionNoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAdmissionNoKeyPressed
+        
+    }//GEN-LAST:event_txtAdmissionNoKeyPressed
+
+    private void txtAdmissionNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAdmissionNoActionPerformed
+        submit();
+    }//GEN-LAST:event_txtAdmissionNoActionPerformed
+
+    private void jButton2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton2KeyPressed
+        approval();
+    }//GEN-LAST:event_jButton2KeyPressed
 
     /**
      * @param args the command line arguments
@@ -261,14 +230,12 @@ public class stampfees_checker extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBox checkBoxApproval;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JTextField txtAdmissionNo;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtVClass;
@@ -279,7 +246,71 @@ public class stampfees_checker extends javax.swing.JDialog {
         txtAdmissionNo.setText("");
         txtName.setText("");
         txtVClass.setText("");
-        checkBoxApproval.setSelected(false);
 
+    }
+
+    private void submit() {
+        try {
+            ResultSet rs = model.db.getData("SELECT\n"
+                    + "	uniquecustomerdetails.namewithinitial, \n"
+                    + "	customer_register.vehicle_class\n"
+                    + "FROM\n"
+                    + "	uniquecustomerdetails\n"
+                    + "	INNER JOIN\n"
+                    + "	customer_register\n"
+                    + "	ON \n"
+                    + "		uniquecustomerdetails.id = customer_register.uniqueCustomerDetails_id\n"
+                    + "WHERE\n"
+                    + "	customer_register.admission_no = '" + txtAdmissionNo.getText() + "'");
+
+            if (rs.next()) {
+
+                txtName.setText(rs.getString(1));
+                txtVClass.setText(rs.getString(2));
+
+            }
+            
+            jButton2.grabFocus();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void approval() {
+          if (JOptionPane.showConfirmDialog(null, "Are you sure to continue?", "WARNING",
+                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            if (!txtAdmissionNo.getText().isEmpty()) {
+                int approval = 1;
+                String adm;
+                try {
+
+                    ResultSet rs = model.db.getData("SELECT\n"
+                            + "admision_no\n"
+                            + "FROM\n"
+                            + "stampfees_checker\n"
+                            + "WHERE\n"
+                            + "stampfees_checker.admision_no = '" + txtAdmissionNo.getText() + "'");
+
+                    if (rs.next()) {
+
+                        adm = rs.getString(1);
+                        System.out.println(adm);
+                        if (txtAdmissionNo.getText().equals(adm)) {
+                            com.Messages.errorjoption("Already exist!");
+                        }
+
+                    }else{
+
+                    model.db.putData("INSERT INTO stampfees_checker (admision_no,pay_approved) values ('" + txtAdmissionNo.getText() + "','" + approval + "')");
+                    com.Messages.normaljoption("Approved");
+                    clear();
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }

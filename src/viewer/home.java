@@ -741,7 +741,7 @@ public class home extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jMenuItem29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem29ActionPerformed
-        if (userstatus.LodUser.equals("a")) {
+        if (userstatus.LodUser.equals("pradeep")) {
             new stampfees_checker(this, false).setVisible(true);
         } else {
             com.Messages.warningjoption("You don't have admin rights!!!");

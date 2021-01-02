@@ -5,8 +5,16 @@
  */
 package viewer;
 
+import com.ColorchangeJtableCell;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Font;
 import java.sql.ResultSet;
+import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 /**
  *
@@ -21,6 +29,8 @@ public class viewAllCustomer extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         loadclientall();
+        changetblPro();
+        colorchange();
     }
 
     /**
@@ -50,12 +60,19 @@ public class viewAllCustomer extends javax.swing.JDialog {
 
             },
             new String [] {
-                "ID", "NIC", "Name", "Admission No", "V Class", "Reg Date"
+                "ID", "NIC", "Name", "Admission No", "V Class", "Reg Date", "StampFees"
             }
         ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -150,31 +167,99 @@ public class viewAllCustomer extends javax.swing.JDialog {
         dtm.setRowCount(0);
         try {
             ResultSet rs = model.db.getData("SELECT\n"
-                    + "customer_register.id,\n"
-                    + "customer_register.admission_no,\n"
-                    + "uniquecustomerdetails.nic,\n"
-                    + "uniquecustomerdetails.`namewithinitial`,\n"
-                    + "customer_register.vehicle_class,\n"
-                    + "customer_register.reg_date\n"
-                    + "FROM\n"
-                    + "customer_register ,\n"
-                    + "uniquecustomerdetails\n"
-                    + "WHERE\n"
-                    + "customer_register.uniqueCustomerDetails_id = uniquecustomerdetails.id ORDER BY\n"
-                    + "customer_register.id DESC ");
+                    + "	FULL.pay_approved, \n"//1
+                    + "	customer_register.admission_no, \n"//2
+                    + "	customer_register.id, \n"//3
+                    + "	uniquecustomerdetails.nic, \n"//4
+                    + "	uniquecustomerdetails.namewithinitial, \n"//5
+                    + "	customer_register.vehicle_class, \n"//6
+                    + "	customer_register.reg_date\n"//7
+                    + " FROM\n"
+                    + "	uniquecustomerdetails\n"
+                    + "	INNER JOIN\n"
+                    + "	customer_register\n"
+                    + "	ON \n"
+                    + "	uniquecustomerdetails.id = customer_register.uniqueCustomerDetails_id\n"
+                    + "	LEFT JOIN\n"
+                    + "	stampfees_checker AS `FULL`\n"
+                    + "	ON \n"
+                    + "	FULL.admision_no = customer_register.admission_no\n"
+                    + "ORDER BY\n"
+                    + "	customer_register.id DESC ");
 
             while (rs.next()) {
-                String id = rs.getString(1);
+                String id = rs.getString(3);
                 String admno = rs.getString(2);
-                String nic = rs.getString(3);
-                String name = rs.getString(4);
-                String Vclass = rs.getString(5);
-                String date = rs.getString(6);
-                Object arr[] = {id, nic, name, admno,Vclass, date};
+                String nic = rs.getString(4);
+                String name = rs.getString(5);
+                String Vclass = rs.getString(6);
+                String date = rs.getString(7);
+                int stampfees = rs.getInt(1);
+
+                boolean stamp;
+                if (stampfees == 1) {
+                    stamp = true;
+
+                } else {
+                    stamp = false;
+                }
+
+                Object arr[] = {id, nic, name, admno, Vclass, date, stamp};
                 dtm.addRow(arr);
+
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+    }
+
+    private void changetblPro() {
+        JTableHeader header = tblAll.getTableHeader();
+        header.setBackground(Color.LIGHT_GRAY);
+        header.setFont(new Font("Tahoma", Font.BOLD, 15));
+
+        ((DefaultTableCellRenderer) header.getDefaultRenderer()).setHorizontalAlignment(JLabel.CENTER);
+
+        DefaultTableCellRenderer centercellRenderer = new DefaultTableCellRenderer();
+        centercellRenderer.setHorizontalAlignment(JLabel.CENTER);
+
+        //  ColorchangeJtableCell cl = new ColorchangeJtableCell(tblAll,"name", Color.red,1);
+        // tblAll.getColumnModel().getColumn(1).setCellRenderer(centercellRenderer);
+        //tblmonthinform.getColumnModel().getColumn(1).setCellRenderer(centercellRenderer);
+//        DefaultTableCellRenderer rightcellreCellRenderer = new DefaultTableCellRenderer();
+//        rightcellreCellRenderer.setHorizontalAlignment(JLabel.RIGHT);
+//        tblAll.getColumnModel().getColumn(2).setCellRenderer(rightcellreCellRenderer);
+    }
+
+    public void colorchange() {
+        tblAll.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+            @Override
+
+            public Component getTableCellRendererComponent(
+                    JTable table, Object value, boolean isSelected,
+                    boolean hasFocus, int row, int column) {
+
+                JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+
+                Color c = Color.WHITE;
+                Object textto = table.getValueAt(row, 6);
+                if (textto.equals(isSelected = true))
+                    c = Color.GREEN;
+                    label.setBackground(c);
+                    tblAll.setSelectionForeground(Color.BLUE);
+
+       ////////////
+                    return label;
+                
+
+            }
+            });
+        
+
     }
 }
+
+    
+
+
